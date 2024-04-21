@@ -1,0 +1,8 @@
+outDir='test_name/wrk/webflux-jdbc'
+mkdir -p $outDir
+for i in 4 10 15 20 25 30 35 40 45 50 60 70 80 90 100
+do
+  echo "start $i";
+  wrk -t4 -c$i -d60s --latency -s scripts/get-mixed.lua http://addr:8080/people >> "$outDir/$i.txt";
+  echo "done $i";
+done
